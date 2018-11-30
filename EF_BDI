@@ -1,0 +1,42 @@
+use Negocios
+go
+select*from sys.triggers
+go
+CREATE TRIGGER reminder1  
+ON ventas.clientes  
+AFTER INSERT, UPDATE   
+AS RAISERROR ('Notify Customer Relations', 16, 10);  
+GO 
+create trigger trcategoria
+on compras.categorias
+for insert,update,delete
+as
+begin
+	print 'ha realizado una transaccion en categoria'
+end
+go
+create trigger trcategoria2
+on compras.categorias
+after insert,update,delete
+as
+begin
+	print 'ha realizado una tr2'
+end
+go
+create trigger trcategoria3
+on compras.categorias
+for insert,update,delete
+as
+begin
+	print 'hasdasd'
+end
+go
+
+select*from Compras.categorias
+insert into Compras.categorias values ('100','sprueba trigers','descripcion')
+set nocount on
+insert into Compras.categorias values ('106','sprueba ','descripcion2')
+go
+
+set nocount on update Compras.categorias set NombreCategoria='Hortalizas'where IdCategoria='105'
+go
